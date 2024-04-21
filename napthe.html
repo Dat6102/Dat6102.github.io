@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nạp thẻ</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .success-message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            z-index: 9999;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -44,8 +58,9 @@
                 <label for="cardCode">Mã thẻ:</label>
                 <input type="text" id="cardCode">
             </div>
-            <button type="button" onclick="guiTheCao()">Xác nhận</p>(Vui lòng kiểm tra kĩ, nhập sai là bạn mất luôn thẻ và tui cũng k có tiền ăn sáng💀)</button>
+            <button type="button" onclick="guiTheCao()">Xác nhận</button>
         </form>
+        <div id="successMessage" class="success-message"></div>
     </div>
 
     <script>
@@ -71,10 +86,16 @@
                 if (xhr.status === 200) {
                     var response = JSON.parse(xhr.responseText);
                     console.log(response);
-                    alert(response.msg);
                     if (response.status === '00') {
                         var amount = menhgia; // Số tiền nạp thành công
                         window.location.href = "success_notification.html?sotien=" + amount;
+                    } else {
+                        var successMessage = document.getElementById('successMessage');
+                        successMessage.innerHTML = response.msg;
+                        successMessage.style.display = 'block';
+                        setTimeout(function () {
+                            successMessage.style.display = 'none';
+                        }, 10000); // 10 seconds
                     }
                 } else {
                     console.error('Lỗi khi gửi yêu cầu:', xhr.statusText);
