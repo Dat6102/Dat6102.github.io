@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thông báo nạp thẻ thành công</title>
+<script>
+window.onload = function() {
+    // Trích xuất số tiền từ tham số URL
+    var queryString = window.location.search;
+    var urlParams = new URLSearchParams(queryString);
+    var amount = urlParams.get('sotien');
+
+    // Hiển thị thông báo
+    alert("Cảm ơn bạn đã ủng hộ mình " + amount + " nhaaa:>");
+};
+</script>
+</head>
+<body>
+</body>
+</html>

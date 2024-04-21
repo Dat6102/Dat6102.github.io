@@ -1,0 +1,80 @@
+/* napthe_style.css */
+
+/* Đường dẫn đến font chữ trên máy tính */
+@font-face {
+    font-family: 'YourCustomFont'; /* Tên font chữ */
+    src: url('font.ttf') format('opentype'); /* Đường dẫn đến file font chữ */
+}
+
+/* Sử dụng font chữ đã tải sẵn */
+body {
+    font-family: 'YourCustomFont', Arial, sans-serif; /* Sử dụng font chữ dự phòng nếu font chữ chính không khả dụng */
+    background-color: #000; /* Màu đen hoàn toàn cho nền */
+}
+
+.container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #1c1c1c;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+h2 {
+    margin-top: 0;
+    text-align: center;
+    color: #007bff;
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ccc;
+}
+
+select,
+input[type="text"],
+input[type="password"] {
+    width: calc(100% - 10px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid;
+    border-color: #ff0000; /* Màu đỏ đậm cho viền */
+    border-radius: 4px;
+    background-color: #333;
+    color: #f9f9f9;
+}
+
+select {
+    margin-right: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff4d4d;
+    color: #f9f9f9;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #cc0000;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+}
+
+.success-message {
+    color: green;
+    font-size: 14px;
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nạp thẻ</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Donate cho Datz:></h2>
+        <form id="napTheForm">
+            <div>
+                <label for="cardType">Loại thẻ:</label>
+                <select id="cardType">
+                    <option value="Viettel">Viettel</option>
+                    <option value="Mobifone">Mobifone</option>
+                    <option value="Vinaphone">Vinaphone</option>
+                    <option value="Zing">Zing</option>
+                    <option value="Vietnamobile">Vietnamobile</option>
+                    <option value="Vcoin">Vcoin</option>
+                    <option value="Gate">Gate</option>
+                </select>
+            </div>
+            <div>
+                <label for="cardValue">Mệnh giá:</label>
+                <select id="cardValue">
+                    <option value="10000">10.000</option>
+                    <option value="20000">20.000</option>
+                    <option value="30000">30.000</option>
+                    <option value="50000">50.000</option>
+                    <option value="100000">100.000</option>
+                    <option value="200000">200.000</option>
+                    <option value="300000">300.000</option>
+                    <option value="500000">500.000</option>
+                    <option value="1000000">1.000.000</option>
+                </select>
+            </div>
+            <div>
+                <label for="cardSerial">Seri:</label>
+                <input type="text" id="cardSerial">
+            </div>
+            <div>
+                <label for="cardCode">Mã thẻ:</label>
+                <input type="text" id="cardCode">
+            </div>
+            <button type="button" onclick="guiTheCao()">Xác nhận</p>(Vui lòng kiểm tra kĩ, nhập sai là bạn mất luôn thẻ và tui cũng k có tiền ăn sáng💀)</button>
+        </form>
+    </div>
+
+    <script>
+        function guiTheCao() {
+            var apiKey = '51245009AAA6ED43E44A3B83C37B7649';
+            var type = document.getElementById('cardType').value;
+            var seri = document.getElementById('cardSerial').value;
+            var mathe = document.getElementById('cardCode').value;
+            var menhgia = document.getElementById('cardValue').value;
+            var content = generateRandomString();
+
+            var formData = new FormData();
+            formData.append('APIkey', apiKey);
+            formData.append('type', type);
+            formData.append('seri', seri);
+            formData.append('mathe', mathe);
+            formData.append('menhgia', menhgia);
+            formData.append('content', content);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://thesieutoc.net/chargingws/v2');
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    console.log(response);
+                    alert(response.msg);
+                    if (response.status === '00') {
+                        var amount = menhgia; // Số tiền nạp thành công
+                        window.location.href = "success_notification.html?sotien=" + amount;
+                    }
+                } else {
+                    console.error('Lỗi khi gửi yêu cầu:', xhr.statusText);
+                    alert('Đã xảy ra lỗi khi gửi yêu cầu.');
+                }
+            };
+            xhr.send(formData);
+        }
+
+        function generateRandomString() {
+            return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        }
+    </script>
+</body>
+</html>
