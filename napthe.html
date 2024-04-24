@@ -87,8 +87,12 @@
                     var response = JSON.parse(xhr.responseText);
                     console.log(response);
                     if (response.status === '00') {
-                        var amount = menhgia; // Số tiền nạp thành công
-                        window.location.href = "success_notification.html?sotien=" + amount;
+                        var successMessage = document.getElementById('successMessage');
+                        successMessage.innerHTML = "Yêu cầu được xử lý thành công!";
+                        successMessage.style.display = 'block';
+                        setTimeout(function () {
+                            successMessage.style.display = 'none';
+                        }, 5000); // 5 seconds
                     } else {
                         var successMessage = document.getElementById('successMessage');
                         successMessage.innerHTML = response.msg;
